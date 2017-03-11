@@ -38,12 +38,6 @@ void setup() {
 
 void process_command(byte command[]) {
     int led = command[0];
-    
-    
-//    digitalWrite(debug_led, HIGH);    
-//    leds[led].r = command[1]; 
-//    leds[led].g = command[2]; 
-//    leds[led].b = command[3];
 
     pixels.setPixelColor(led, pixels.Color(command[1],command[2],command[3]));
     pixels.show();
