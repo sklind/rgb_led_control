@@ -1,35 +1,23 @@
 require 'serialport'
 require 'byebug'
 
-PIXELS = 24
-SERIAL_PORT = "/dev/ttyUSB0"
-SERIAL_RATE = 115200
+module Arduino
+  SERIAL_PORT = "/dev/ttyUSB0"
+  SERIAL_RATE = 115200
+  PIXELS = 24
 
-$s = SerialPort.new(SERIAL_PORT, baud: SERIAL_RATE)
+  def self.serial_port
+    @port ||= SerialPort.new(SERIAL_PORT, baud: SERIAL_RATE)
+  end
+end
 
+# Note: 255 is a control character, so don't try and set an led value to that
 def set_pixel(pixel, red, green, blue)
-  red   = clamp_value(red)
-  green = clamp_value(green)
-  blue  = clamp_value(blue)
-
-  string = control_string(pixel, red, green, blue)
-
-  $s.write(string)    
-end
-
-def control_string(pixel, red, green, blue)
-  "#{pixel.chr}#{red.chr}#{green.chr}#{blue.chr}#{255.chr}"
-end
-
-# 255 and 254 are control characters, so if someone tries to use that, just reduce the brightness
-def clamp_value(value)
-  [value, 253].min
+  Arduino.serial_port.write("#{pixel.chr}#{red.chr}#{green.chr}#{blue.chr}#{255.chr}")    
 end
 
 while(true)
-  sleep_time = 0.1
-
-  (0..PIXELS).each do |pixel|
+  (0..Arduino::PIXELS).each do |pixel|
     set_pixel(pixel, 0,0,50)
     sleep(0.1)
     set_pixel(pixel, 0,0,0)
