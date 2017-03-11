@@ -37,4 +37,3 @@ for example, if you're using a terminal client that supports hex input:
 
 * Because 255 is a control character, you can't actually set a pixel to this brightness (but 253 looks almost identical)
 * For ws2801, 254 is also a control character to update all the pixels, for ws2812, you can use 254 for pixel values
-* default
