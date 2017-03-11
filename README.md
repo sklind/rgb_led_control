@@ -6,5 +6,5 @@ Control an RGB led strip from a computer over the serial port (using an ardunio 
 
 
 | byte 0        | byte 1 | byte 2 | byte 3 | byte 5                 |
-| ------------- |:------:| ----- :|  -----:| ----------------------:|
+| ------------- | ------ | ------ | ------ | ---------------------- |
 | pixel number  | red    | blue   |  green | stop byte (always 255) |
