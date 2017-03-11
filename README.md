@@ -1,8 +1,9 @@
 Control an RGB led strip from a computer over the serial port (using an ardunio as the middle man).
 
+* program the arduino with ws2801_control or ws2812_control
 * Connect to the serial port using whatever library or tool you prefer (baud rate defaults to 115200)
 * send 8 bit bytes, terminated by a byte with value 255 to signal the end of the command 
-
+* There's an example app written in ruby in ruby_test.rb for reference
 
 | byte 0        | byte 1 | byte 2 | byte 3 | byte 5                 |
 | ------------- | ------ | ------ | ------ | ---------------------- |
