@@ -1,5 +1,4 @@
-require 'serialport'
-require 'byebug'
+require 'serialport' # NOTE: you probably need to install this gem with: 'gem install serialport'
 
 module Arduino
   SERIAL_PORT = "/dev/ttyUSB0"
