@@ -11,9 +11,18 @@ module Arduino
   end
 end
 
-# Note: 255 is a control character, so don't try and set an led value to that
 def set_pixel(pixel, red, green, blue)
-  Arduino.serial_port.write("#{pixel.chr}#{red.chr}#{green.chr}#{blue.chr}#{255.chr}")    
+  # first byte is whice led number to switch on
+  Arduino.serial_port.write(pixel.chr)     
+
+  # next 3 bytes are red, green and blue values
+  # Note: 255 signifies the end of the command, so don't try and set an led value to that
+  Arduino.serial_port.write(red.chr)    
+  Arduino.serial_port.write(green.chr)    
+  Arduino.serial_port.write(blue.chr)
+
+  # then end with a termination character
+  Arduino.serial_port.write(255.chr)  
 end
 
 while(true)
